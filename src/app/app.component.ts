@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChistesService } from './chistes.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'chistes-consumo-api';
+  chiste = '';
+
+  constructor(private chistesService: ChistesService) {}
+
+  cargaChiste() {
+    this.chiste = 'Cargando chiste...';
+    this.chistesService.getChiste().subscribe(
+      nuevoChiste => this.chiste = nuevoChiste  
+    )
+  }
 }
